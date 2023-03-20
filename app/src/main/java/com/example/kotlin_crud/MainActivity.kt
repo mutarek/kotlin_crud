@@ -1,6 +1,7 @@
 package com.example.kotlin_crud
 
 import android.app.ProgressDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.kotlin_crud.data.model.Todo
+import com.example.kotlin_crud.screen.AllTodo
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var title: EditText
     lateinit var desc: EditText
     lateinit var save: Button
+    lateinit var show: Button
 
     private val db: FirebaseFirestore by lazy { Firebase.firestore }
 
@@ -28,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         title = findViewById(R.id.titleCon)
         desc = findViewById(R.id.descCon)
         save = findViewById(R.id.save)
+        show = findViewById(R.id.show)
+
+        show.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, AllTodo::class.java)
+            startActivity(intent)
+        })
 
         save.setOnClickListener(View.OnClickListener {
             saveToDb()
